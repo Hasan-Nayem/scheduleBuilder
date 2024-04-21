@@ -1,4 +1,3 @@
-import React from 'react'
 import './SideNavigation.css';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { Link } from 'react-router-dom';

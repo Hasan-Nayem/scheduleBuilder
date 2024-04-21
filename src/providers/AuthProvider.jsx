@@ -16,7 +16,6 @@ export default function AuthProvider({children}) {
       signInWithGoogle,
       signUpWithGoogle,
       logout,
-      
     };
     useEffect(() =>{
       const unsubscribe = onAuthStateChanged(auth,currentUser => {

@@ -27,6 +27,7 @@ export const router = createBrowserRouter([
           children: [
             {
               path: '/manage/sp-manage/manage',
+              loader: () => fetch('http://127.0.0.1:8000/api/getSpecialty'),
               element: <SP_Manage />,
             },
             {
@@ -34,7 +35,10 @@ export const router = createBrowserRouter([
               element: <SP_Create />,
             },
             {
-              path: '/manage/sp-manage/update',
+              path: '/manage/sp-manage/update/:id',
+              loader: ({params}) => fetch(`http://127.0.0.1:8000/api/editSpecialty/${params.id}`, {
+                method: "POST"
+              }),
               element: <SP_Update />,
             },
             {
