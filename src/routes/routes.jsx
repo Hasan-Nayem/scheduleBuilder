@@ -47,10 +47,14 @@ export const router = createBrowserRouter([
             },
             {
               path: '/manage/ex-manage/manage',
+              loader: () => fetch(`http://127.0.0.1:8000/api/getExam`),
               element: <EX_Manage />,
             },
             {
-              path: '/manage/ex-manage/update',
+              path: '/manage/ex-manage/update/:id',
+              loader: ({params}) => fetch(`http://127.0.0.1:8000/api/editExam/${params.id}`, {
+                method: "POST"
+              }),
               element: <EX_Update />,
             },
           ],

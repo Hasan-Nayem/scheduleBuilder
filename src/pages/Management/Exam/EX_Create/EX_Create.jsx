@@ -1,45 +1,37 @@
-import { useMutation } from '@tanstack/react-query';
-import React from 'react'
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function EX_Create() {
-  const postData = async (data) => {
-    const response = await fetch('http://192.168.30.215:3000/exam/add', {
-      method: 'POST',
-      headers: { 
-        'Content-Type': 'application/json' 
-      },
-      body: JSON.stringify(data)
-    });
-    return response.json();
-  }
-  const {mutate, isLoading, isError} = useMutation(postData, {
-    onSuccess: (successData)=> {
-      console.log(successData);
-    },
-
-  });
-
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
     const status = form.status.value;
     const data = { name: name, status: status }
-    // postData(data);
-    mutate({ name: name, status: status });
+    fetch(`http://127.0.0.1:8000/api/addExam`, {
+      method : 'POST',
+      headers : {
+        'Content-Type': 'application/json',
+      },
+      body : JSON.stringify(data)
+    })
+    .then(response => response.json()
+    .then((result) => {
+      if (result) {
+        toast.success(result.message);
+        navigate('/manage/ex-manage/manage');
+        setLoading(false);
+      }else {
+        setLoading(false);
+        toast.error(result.message);
+      }
+    })
+    );
   }
   
-  if ( isLoading ) {
-    return ( 
-      <p>Loading ..... </p>
-     );
-  }
-  if ( isError ) {
-    return ( 
-      <p>Error ..... </p>
-     );
-  }
-
   return (
     <div className='container'>
       <h4 className='fw-bolder roboto-medium text-left'>Create New Exam</h4>
@@ -55,7 +47,17 @@ export default function EX_Create() {
             <option value='0'>Inactive</option>
           </select>
         </div>
-        <input type='submit' value='Add' className='form-control btn btn-success' />
+        <div className="form-group my-1">
+        {
+          loading? 
+          <div className="d-flex justify-content-center my-1">
+            <div className="spinner-border text-success " role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </div> : 
+          <button type='submit' className='form-control btn btn-success'>Add</button>
+        }
+        </div>
       </form>
     </div>
   )

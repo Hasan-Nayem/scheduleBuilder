@@ -54,13 +54,13 @@ export default function SP_Manage() {
   }
   return (
     <div className="">
-    <h1 className="text-center mb-2">All Specialties</h1>
+    <h4 className="text-center mb-2 roboto-medium">All Specialties</h4>
     {
       data.data.length === 0?
-      <div className="alert alert-danger" role="alert">
+      <div className="alert alert-danger roboto-regular" role="alert">
         No Specialty found. <Link to={`/manage/sp-manage/create`} className="alert-link">Click here to add.</Link>
       </div>: 
-      <table className="table table-striped text-center">
+      <table className="table table-striped text-center roboto-regular">
         <thead>
           <tr>
             <th>#Sl</th>
