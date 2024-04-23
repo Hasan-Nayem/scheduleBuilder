@@ -20,7 +20,7 @@ export default function Header() {
         <div className="container my-3">
             <Navbar expand="lg" className="">
                 <Container fluid>
-                    <Navbar.Brand href="#">BCPS Schedule Builder</Navbar.Brand>
+                    <Navbar.Brand href="/">BCPS Schedule Builder</Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
                         <Nav
@@ -30,7 +30,7 @@ export default function Header() {
                         >
                             <Link to={'/'} className='nav-link'>Home</Link>
                             <Link to={'/manage'} className='nav-link'>Management</Link>
-                            <Link to={'#'} className='nav-link'>Build Scedule</Link>
+                            <Link to={'/builder'} className='nav-link'>Build Scedule</Link>
                             <NavDropdown title="Welcome Admin" id="basic-nav-dropdown">
                                 <NavDropdown.Item  href="#action/3.1" onClick={handleLogout}>
                                     {/* <Link to={'#'} onClick={handleLogout} className='btn btn-danger'>Logout</Link> */}

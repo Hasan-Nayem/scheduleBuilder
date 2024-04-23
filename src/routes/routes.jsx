@@ -11,6 +11,9 @@ import EX_Manage from "../pages/Management/Exam/EX_Manage/EX_Manage.jsx";
 import EX_Update from "../pages/Management/Exam/EX_Update/EX_Update.jsx";
 import Login from "../pages/Login/Login.jsx";
 import Registration from "../pages/Registration/Registration.jsx";
+import BuilderLayout from "../Layouts/BuilderLayout.jsx";
+import BuildSchedule from "../pages/Builder/BuildSchedule/BuildSchedule.jsx";
+import ViewSchedule from "../pages/Builder/ViewSchedule/ViewSchedule.jsx";
 
 export const router = createBrowserRouter([
     {
@@ -19,6 +22,7 @@ export const router = createBrowserRouter([
       children: [
         {
           path: '/',
+          loader: () => fetch('http://127.0.0.1:8000/api/getSession'),
           element: <Home />,
         },
         {
@@ -58,8 +62,24 @@ export const router = createBrowserRouter([
               element: <EX_Update />,
             },
           ],
+        },
+        {
+          path: "/builder",
+          loader: () => fetch(`http://127.0.0.1:8000/api/getSession`),
+          element: <BuilderLayout/>,
+          children: [
+            {
+              path: "/builder/schedule-build",
+              element: <BuildSchedule/>
+            },
+            {
+              path: "/builder/schedule-view",
+              element: <ViewSchedule/>
+            }
+          ],
         }
       ],
+      
     },
     {
       path: "/login",
